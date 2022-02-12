@@ -76,6 +76,14 @@ public class Fire {
     @OneToMany(mappedBy = "fire")
     private Set<Scale> scales=new HashSet<>();
 
+    public Set<Scale> getScales() {
+        return scales;
+    }
+
+    public void setScales(Set<Scale> scales) {
+        this.scales = scales;
+    }
+
     //-------------------------------------------------------------------
     @JsonIgnore
     @ManyToMany(mappedBy = "fireConfirmed")

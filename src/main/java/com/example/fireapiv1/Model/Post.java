@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Post {
     public Post() {}
 
+
     public Post(String comment, String cover_url, Client client) {
         this.comment = comment;
         this.cover_url = cover_url;

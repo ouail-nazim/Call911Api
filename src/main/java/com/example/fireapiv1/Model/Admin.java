@@ -16,6 +16,15 @@ public class Admin extends User {
 
     @Column(name = "ip_address")
     private String ipAddress;
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
     public String getipAddress() {
         return ipAddress;
     }

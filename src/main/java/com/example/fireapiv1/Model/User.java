@@ -118,4 +118,14 @@ public abstract class User {
         this.phone_number = phone_number;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Update password
+    public boolean updatePassword(String old,String password){
+        if (this.getPassword().equals(old)){
+            this.setPassword(password);
+            return true;
+        }
+        return false;
+    }
+
 }

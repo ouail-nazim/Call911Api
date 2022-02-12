@@ -39,6 +39,17 @@ public class FireAPiV1Application {
             Fire fire1 = new Fire(34.54, 4.5, "bousbaa moussa", "didouche mourad", "25034", "Algeria", u2);
             Post post1 = new Post("post num 1",u1);
 
+            if (u1.updatePassword("123","Hello world")){
+                System.out.println("password updated");
+            }else{
+                System.out.println("wrong old password");
+            }
+            if (u1.updatePassword("123","Hello world")){
+                System.out.println("password updated");
+            }else{
+                System.out.println("wrong old password");
+            }
+
             fireRepository.save(fire1);
             postRepository.save(post1);
             clientRepository.saveAll(List.of(u1, u2));

@@ -18,6 +18,14 @@ public class Scale {
     @GeneratedValue(strategy = SEQUENCE, generator = "scale_sequence")
     Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Scale() {}
     public Scale(Client client, Fire fire, State state) {
         this.client = client;

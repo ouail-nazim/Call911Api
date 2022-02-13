@@ -18,10 +18,11 @@ public class FireService {
         this.fireRepository = fireRepository;
     }
 
-    public List<Fire> getAllFires(){
+    public List<Fire> getAllFires() {
         return fireRepository.findAll();
     }
-     public Fire saveFire(Fire fire){
+
+    public Fire saveFire(Fire fire) {
         return fireRepository.save(fire);
-     }
+    }
 }

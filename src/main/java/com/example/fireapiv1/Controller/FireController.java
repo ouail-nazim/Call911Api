@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
+//test test
 @RestController
 @RequestMapping(path = "/api/fires")
 public class FireController {
@@ -42,6 +42,7 @@ public class FireController {
     ){
         Optional<Client> client = clientRepository.findById(uid);
         if (client.isPresent()){
+            // create fire in bd
             Fire newfire= fireService.saveFire(client.get().createFire(fire));
             //confirm fire when created
             HashMap<String , Object> data = client.get().confirmFire(newfire, State.HIGH);

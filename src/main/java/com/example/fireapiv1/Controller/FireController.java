@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-//test test
+
 @RestController
 @RequestMapping(path = "/api/fires")
 public class FireController {
@@ -30,11 +30,19 @@ public class FireController {
         this.clientRepository = clientRepository;
     }
 
+    /**
+     * @return list of fires created
+     */
     @GetMapping
     public List<Fire> getFirs(){
         return fireService.getAllFires();
     }
 
+    /**
+     * @param fire(latitude,longitude,street,city,zip,country)
+     * @param uid(id of user)
+     * @return new fire created and confirmed by client who have the id=uid
+     */
     @PostMapping
     public Fire saveFire(
             @RequestBody Fire fire,
@@ -52,6 +60,24 @@ public class FireController {
         }else {
             return null;
         }
+    }
+
+    @GetMapping("/confirm")
+    public boolean confirmFire(
+            @RequestParam("user_id") long uid,
+            @RequestParam("fire_id") long fid
+    ){
+        Optional<Client> client = clientRepository.findById(uid);
+        Optional<Fire> fire = fireService.findFire(fid);
+        for (Object c : fire.get().getClientsConfirm().toArray()) {
+            if (((Client) c).getId() ==client.get().getId()){
+                return false;
+            }
+        }
+        HashMap<String , Object> data = client.get().confirmFire(fire.get(), State.HIGH);
+        fireService.saveFire((Fire) data.get("fire"));
+        scaleService.saveScale((Scale) data.get("scale"));
+        return true;
     }
 
 

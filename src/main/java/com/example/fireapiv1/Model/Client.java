@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "Client")
 @Table(name = "clients")
@@ -23,6 +20,19 @@ public class Client extends User {
 
     @Column(name = "reputation")
     private int reputation;
+
+    public Set<Token> getTokens() {
+        return this.tokens;
+    }
+
+    public void setTokens(Set<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    //---One to many with fires ----------------------------------------
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private Set<Token> tokens = new HashSet<>();
     //---One to many with fires ----------------------------------------
     @JsonIgnore
     @OneToMany(mappedBy = "client")
@@ -104,5 +114,10 @@ public class Client extends User {
                 ", phone_number=" + getPhone_number() +
                 ", reputation=" + this.reputation +
                 '}';
+    }
+
+    public Token generateToken() {
+        Token token=new Token(this);
+        return token;
     }
 }

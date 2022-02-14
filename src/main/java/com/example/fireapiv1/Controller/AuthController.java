@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
 @RequestMapping(path = "/api/auth")
 public class AuthController {
@@ -31,10 +32,27 @@ public class AuthController {
     /**
      * @return login
      */
-    @PostMapping("/login")
-    public HashMap<String, Object> Login(
-            @RequestBody LoginRequest request
+//    @PostMapping("/login")
+//    public HashMap<String, Object> Login(
+//            @RequestBody LoginRequest request
+//    ) {
+//        Optional<Client> client = clientService.ClientAttempt(request.getEmail(), request.getPassword());
+//        HashMap<String, Object> data = new HashMap<String, Object>();
+//        if (client.isPresent()) {
+//            Token token = client.get().generateToken();
+//            tokenService.saveToken(token);
+//            data.put("token", token.getToken());
+//            data.put("client", client.get());
+//        }
+//        return data;
+//    }
+
+    @GetMapping("/login")
+    public HashMap<String, Object> getLogin(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
     ) {
+        LoginRequest request = new LoginRequest(email,password);
         Optional<Client> client = clientService.ClientAttempt(request.getEmail(), request.getPassword());
         HashMap<String, Object> data = new HashMap<String, Object>();
         if (client.isPresent()) {

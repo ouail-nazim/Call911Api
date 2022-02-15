@@ -50,10 +50,12 @@ public class ClientService {
     public Optional<Client> RegisterClient(RegisterRequest request) {
         Optional<Client> client = clientRepository.findClientByEmail(request.getEmail());
         if (client.isPresent()) {
+            System.out.println("user exist");
             return null;
         }
         Client c = CreateNewClient(request);
-        c = clientRepository.save(c);
-        return Optional.of(c);
+        Client x = clientRepository.save(c);
+        System.out.println("user created");
+        return Optional.of(x);
     }
 }
